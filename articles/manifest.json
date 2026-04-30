@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "category": "graphs",
+      "categoryLabel": "グラフ",
+      "slug": "combinatorial-bmm-conjecture",
+      "title": "Combinatorial BMM Conjecture",
+      "summary": "Combinatorial BMM Conjectureについてのまとめメモ"
+    },
+    {
+      "category": "graphs",
+      "categoryLabel": "グラフ",
+      "slug": "transitive-orientation",
+      "title": "Transitive Orientation",
+      "summary": "無向グラフを推移性を満たすように向き付けをするアルゴリズムのメモ"
+    },
+    {
+      "category": "graphs",
+      "categoryLabel": "グラフ",
+      "slug": "undirected-k-simple-shortest-paths",
+      "title": "Undirected K Simple Shortest Paths Problem",
+      "summary": "正の(辺)重み付き無向グラフにおける特定の2頂点間の最短経路を小さい順に k 個列挙するアルゴリズムのメモです。"
+    },
+    {
+      "category": "graphs",
+      "categoryLabel": "グラフ",
+      "slug": "apsp-via-fmm",
+      "title": "All Pairs Shortest Paths via Faster Matrix Multiplication",
+      "summary": "行列積を用いた最短経路の計算について勉強したのでメモ"
+    },
+    {
+      "category": "graphs",
+      "categoryLabel": "グラフ",
+      "slug": "distance-sensitivity-oracle",
+      "title": "Distance Sensitivity Oracle",
+      "summary": "1-VFT Distance Sensitivity Oracle (VFT : Vertex Fault-Tolerant) とは、任意の重み付き有向グラフ $G$ に対して、以下のクエリに回答可能なデータ構造です。"
+    },
+    {
+      "category": "graphs",
+      "categoryLabel": "グラフ",
+      "slug": "unweighted-undirected-replacement-paths",
+      "title": "Unweighted Undirected Replacement Paths",
+      "summary": "本記事は [ABC218 F - Blocked Roads](https://atcoder.jp/contests/abc218/tasks/abc218f) の Path Comparison Model 下でもほぼタイトな Ramdomized Algorithm の備忘録です．Path Comparison Model の理解としては，行列積を使用しない解法だと思っておけばイメージとして十分です（(min, +)の行列積を使用すると，$O(n^\\omega)$ 時間で計算可能です）．"
+    }
+  ],
+  "categories": [
+    [
+      "algorithms",
+      "アルゴリズム"
+    ],
+    [
+      "graphs",
+      "グラフ"
+    ],
+    [
+      "data-structures",
+      "データ構造"
+    ],
+    [
+      "math",
+      "数学"
+    ]
+  ]
+}
