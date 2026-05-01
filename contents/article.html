@@ -1,54 +1,16 @@
-<!DOCTYPE html>
+---
+permalink: /contents/article.html
+layout: null
+redirect_to: /articles/
+---
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AlgoNote | Articles</title>
-    <link rel="stylesheet" href="../stylesheet.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Serif:wght@400;600&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <meta http-equiv="refresh" content="0; url={{ '/articles/' | relative_url }}">
+    <title>Articles | {{ site.title }}</title>
   </head>
   <body>
-    <div class="app">
-      <aside class="sidebar">
-        <a class="brand" href="../index.html">AlgoNote</a>
-        <div class="sidebar-section">
-          <div class="sidebar-label">Workspace</div>
-          <nav class="tree">
-            <a class="tree-item" href="../index.html">Home</a>
-            <a class="tree-item active" href="article.html">Articles</a>
-            <a class="tree-item" href="profile.html">Profile</a>
-          </nav>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-label">Themes</div>
-          <nav class="tree">
-            <a class="tree-item" href="article.html?cat=algorithms">アルゴリズム</a>
-            <a class="tree-item" href="article.html?cat=graphs">グラフ</a>
-            <a class="tree-item" href="article.html?cat=data-structures">データ構造</a>
-            <a class="tree-item" href="article.html?cat=math">数学</a>
-          </nav>
-        </div>
-      </aside>
-      <main class="workspace">
-        <div class="topbar">
-          <div>
-            <div class="breadcrumb">Articles</div>
-            <h1 class="page-title">Articles</h1>
-            <p class="page-lead">テーマ別に整理された記事一覧。カードをクリックするとMarkdownを表示します。</p>
-          </div>
-          <div class="search">Search notes</div>
-        </div>
-        <section class="page">
-          <div class="markdown" data-md-dir="../articles"></div>
-        </section>
-      </main>
-    </div>
-      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-    <script src="../scripts/markdown.js"></script>
+    <p><a href="{{ '/articles/' | relative_url }}">Articles</a></p>
   </body>
 </html>

@@ -1,0 +1,59 @@
+---
+title: Articles
+layout: default
+heading: Articles
+breadcrumb: Articles
+lead: テーマ別に整理された記事一覧です。
+section: articles
+---
+<div class="markdown">
+  {% assign notes = site.pages | where_exp: "item", "item.section == 'articles' and item.category" | sort: "date" | reverse %}
+  {% capture tags_buffer %}{% for note in notes %}{% for tag in note.tags %}{{ tag | strip }}|||{% endfor %}{% endfor %}{% endcapture %}
+  {% assign all_tags = tags_buffer | split: "|||" | uniq | sort %}
+  <div class="tag-panel" data-tag-panel>
+    <div class="tag-panel-header">
+      <div>
+        <button class="tag-panel-toggle" type="button" data-tag-panel-toggle aria-expanded="false">Tag 検索</button>
+        <div class="tag-panel-subtitle">選択したタグのいずれかを含む記事を表示します。</div>
+      </div>
+      <button class="tag-clear" type="button" data-tag-clear hidden>Clear</button>
+    </div>
+    <div class="tag-filter-list" data-tag-filter-list hidden>
+      {% for tag in all_tags %}
+        {% assign clean_tag = tag | strip %}
+        {% if clean_tag != "" %}
+          <button class="tag-chip" type="button" data-tag-filter="{{ clean_tag | escape }}">{{ clean_tag }}</button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% for category in site.data.categories %}
+    <section class="section">
+      <h2>{{ category.label }}</h2>
+      <div class="card-grid">
+        {% assign category_notes = notes | where: "category", category.id %}
+        {% for note in category_notes %}
+          <a class="card" href="{{ note.url | relative_url }}" data-note-card data-category="{{ category.id }}" data-tags="{{ note.tags | join: '||' | escape }}">
+            <h3>{{ note.title }}</h3>
+            {% if note.date %}
+              <time class="card-date" datetime="{{ note.date | date: '%Y-%m-%d' }}">{{ note.date | date: '%Y-%m-%d' }}</time>
+            {% endif %}
+            <p>{{ note.summary | default: note.excerpt | strip_html | truncate: 150 }}</p>
+            {% if note.tags %}
+              <div class="card-tags" aria-label="Tags">
+                {% for tag in note.tags %}
+                  <span class="tag-pill">{{ tag }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </a>
+        {% else %}
+          <div class="note-item" data-note-card data-category="{{ category.id }}">
+            <div>記事はまだありません。</div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+  <div class="tag-empty is-filtered-out" data-tag-empty>条件に一致する記事はありません。</div>
+</div>

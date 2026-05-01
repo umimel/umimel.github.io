@@ -1,3 +1,14 @@
+---
+title: Undirected K Simple Shortest Paths
+category: graph-algorithm
+category_label: Graph Algorithm
+summary: 正の重み付き無向グラフにおける特定の2頂点間の最短経路を小さい順に k 個列挙するアルゴリズムのメモ
+date: 2026-04-25
+tags:
+  - shortest path
+  - enumeration
+  - undirected graph
+---
 # Undirected K Simple Shorteset Paths Problem
 
 考えたのでメモ．元論文が見れなくて悲しい．
@@ -37,15 +48,21 @@ $$
 
  $G=(V, E, w)$ が<span style="color: red; "><b>無向グラフ</b></span>であることから、以下が成立します。
 
-:::lemma
+<div class="theorem-block" data-type="lemma" markdown="1">
+<div class="theorem-title">Lemma</div>
+
 パス $P$ 上の任意の辺 $e_i$ $(1 \leq i < p)$ に対して、
 $$
     d_{G - e_i}(s, t) = \min_{\substack{(x, y) \in E \\\\ x \in V(S_i), y \in V(T_i)}}{d_{G}(s, x) + w(x, y) + d_G(y, t)}
 $$
 が成り立つ．
-:::
 
-:::proof
+</div>
+
+<details class="proof-block" markdown="1">
+<summary class="proof-title">Proof</summary>
+<div class="proof-body" markdown="1">
+
 
 $$
 d_{G - e_i}(s, t) = 
@@ -68,12 +85,16 @@ d_G(v_i, y) = w(e_i)+d_G(v_{i+1}, y) > d_G(v_{i+1}, y)
 $
 
 したがって矛盾が生じる。 
-:::
+
+</div>
+</details>
 
 つまり，故障辺によって分割された２つの木の間を結ぶ各辺 $(x, y)$ に対して，頂点 $s$ から頂点 $x$ までの最短経路
 上記の補題1により、以下のアルゴリズムが正しく動作します。
 
-:::algorithm Second Shortest Path Algorithm
+<div class="theorem-block" data-type="algorithm" markdown="1">
+<div class="theorem-title">Algorithm : Second Shortest Path Algorithm</div>
+
 <b>Input : </b> 
 - $G = (V, E, w)$ : 正の辺重み付き無向グラフ
 - $s \in V$ : 始点
@@ -100,7 +121,8 @@ $
         - ただし、存在しない場合は inf
 
 <b> Output : </b> $\min_{1 \leq i < p} d_{G-e_i}(s, t)$ 
-:::
+
+</div>
 
 以上が第2最短経路となります。最小値のみ経路の復元を行いましょう。同じ値があった場合は辺の添字が小さい経路を選択します。
 
@@ -136,7 +158,9 @@ $P_2$ を対象に第2最短経路と似たようなアルゴリズムを適用�
 
 ### アルゴリズム
 
-:::info
+<div class="theorem-block" data-type="info" markdown="1">
+<div class="theorem-title">Info</div>
+
 <b><u>Algorithm2 : Undirected Kth Shortest Path</u></b>
 
 <b>Input</b> : 
@@ -146,7 +170,8 @@ $P_2$ を対象に第2最短経路と似たようなアルゴリズムを適用�
 <b>Variable Decleration :</b>
 - `H[i]` := $i$ 番目に構築するグラフ
 
-:::
+
+</div>
 
 1. Dijkstra’s algorithm で最短経路を求め $P_1$ とする
 2. que に $($P_1$の距離, $1$, $P_1$, $0$)$ をpush

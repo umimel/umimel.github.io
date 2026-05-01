@@ -1,13 +1,26 @@
+---
+title: Distance Sensitivity Oracle
+category: graph-algorithm
+category_label: Graph Algorithm
+summary: "1-VFT Distance Sensitivity Oracle (VFT : Vertex Fault-Tolerant) のメモ"
+date: 2026-04-26
+tags:
+  - shortest path
+  - oracle
+  - fault tolerance
+---
 # Distance Sensitivity Oracle
 
 ## 初めに
 1-VFT Distance Sensitivity Oracle (VFT : Vertex Fault-Tolerant) とは、任意の重み付き有向グラフ $G$ に対して、以下のクエリに回答可能なデータ構造です。
 
-::: 
+<div class="theorem-block" data-type="plain" markdown="1">
+
 Query $(s, t, x)$
 
 グラフ $G$ において，頂点 $x$ を通らない頂点 $s$ から 頂点 $t$ への最短経路長を答えよ
-:::
+
+</div>
 今回は<b>正の辺重み付き有向グラフ</b>を対象とするデータ構造を考えます．
 
 ナイーブな構築としては、始点 $s$ と通れない頂点(以下、故障頂点) $x$ を固定してダイクストラ法を実行することです。この方法では、
@@ -42,17 +55,25 @@ Query $(s, t, x)$
 
 ### 3.2 Sampling
 以下の性質を満たす $\log n + 1$ 個の頂点集合 $R_0, R_2, \dots, R_{\log n}$ を考えます。
-:::claim
+<div class="theorem-block" data-type="claim" markdown="1">
+<div class="theorem-title">Claim</div>
+
 1. $R_0 = V$
 2. 任意の $1 \leq i \leq \log n$ に対して、 $|R_i| = O(n \log n/2^i)$
 3. 任意の $1 \leq i \leq \log n$ に対して、 $\pi_G(\cdot, \cdot)$ 中の ホップ数 $2^i$ を持つ任意の最短経路中には $R_i$ 中の頂点の少なくとも1つ存在する。
-:::
+
+</div>
 
 これは各 $i$ に対して、対象となるパス中における出現回数の多い頂点から順に選択することで達成可能です。
-::: spoiler 証明
+<details class="proof-block" markdown="1">
+<summary class="proof-title">Proof : 証明</summary>
+<div class="proof-body" markdown="1">
+
 $k$ 個目の頂点を選択した後に、サンプリング頂点を含まないホップ数 $2^i$ のパスの個数を $a_k$ とする($a_0 = O(n^2)$)。鳩の巣原理より、サンプリング頂点を含まないパス中の各頂点の出現回数の最大値は 少なくとも $\lceil \frac{2^i a_{k-1}}{n} \rceil$ であることから、 $a_{k} \leq (1 - \frac{2^i}{n}) a_{k-1}$ となる。
 したがって、 $|R_i| = O(n \log n / 2^i)$ となる。
-:::
+
+</div>
+</details>
 この貪欲法は適切に実行することで $O(n^2 \log n)$ 時間で計算可能です。
 
 ### 3.3 Naive Algorithm with Label
@@ -92,24 +113,32 @@ $\pi_G(s, t) = (x_1, x_2, \dots, x_{\ell})$ に対して、以下の手順で構
 
 ### 3.5 Path Cover Lemma
 今回重要な補題は3つありますが、その内の1つ目として Path Cover Lemma を紹介します。
-::: lemma Path Cover Lemma 
+<div class="theorem-block" data-type="lemma" markdown="1">
+<div class="theorem-title">Lemma : Path Cover Lemma</div>
+
 任意の5頂点 $s < x < v < y < t$ $(s, t \in V, x, v, y \in \pi_G(s, t))$ に対して、以下の式が成り立つ。
 
 $$
 d_{G-v}(s, t) = \min(d_G(s, x)+d_{G-v}(x, t), d_{G-v}(s, y)+d_G(y, t), d_{G-[x, y]}(s, t))
 $$
 
-:::
+
+</div>
 ![figure01](https://hackmd.io/_uploads/rJJg9cqdJe.jpg)
 
-::: proof
+<details class="proof-block" markdown="1">
+<summary class="proof-title">Proof</summary>
+<div class="proof-body" markdown="1">
+
 $d_{G-v}(s, t)$ を達成するs-tパスの分岐頂点を $a$ 、合流頂点を $b$ とする。この時、
 - $a < x$ かつ $y < b$ の場合 : $d_{G-v}(s, t) = d_{G-[x, y]}(s, t)$
 - $x \leq a < v$ の場合 : $d_{G-v}(s, t) = d_G(s, x) + d_{G-v}(s, x)$
 - $v < b \leq y$ の場合 : $d_{G-v}(s, t) = d_{G-v}(s, y) + d_G(y, t)$
 
 したがって、補題は成り立つ。
-:::
+
+</div>
+</details>
 
 この補題を、先ほどの center sequence と照らし合わせます。
 故障頂点を $c_{s, t, i} \leq  v \leq c_{s, t, i+1}$ の位置にあるとします。(ただし、故障頂点とcenterが被る場合には、$c_{s, t, i} \leq  v \leq c_{s, t, i+2}$となり注意が必要)
@@ -126,7 +155,9 @@ $
 
 ### 3.6 Bottleneck Lemma
 重要な補題の2つ目であるBottleneck Lemmaを紹介します。
-:::lemma Bottleneck Lemma 
+<div class="theorem-block" data-type="lemma" markdown="1">
+<div class="theorem-title">Lemma : Bottleneck Lemma</div>
+
 任意の5頂点 $s < x < v < y < t$ $(s, t \in V, x, v, y \in \pi_G(s, t))$ に対して、$w \in [x, y]$ を以下を満たす頂点とする。
 
 $$
@@ -139,14 +170,20 @@ $$
 d_{G-v}(s, t) = \min(d_G(s, x)+d_{G-v}(x, t), d_{G-v}(s, y)+d_G(y, t), d_{G-w}(s, t))
 $$
 
-:::
-::: proof
+
+</div>
+<details class="proof-block" markdown="1">
+<summary class="proof-title">Proof</summary>
+<div class="proof-body" markdown="1">
+
 $d_{G-v}(s, t)$ を達成するs-tパス $P$ の分岐頂点を $a$ 、合流頂点を $b$ とする。
 Path Cover Lemmaの証明より、 $a < x$ かつ $y < b$ の場合のみ考える。
 この時、 $P$ は頂点 $w$ を通らないことから、 $d_{G-w}(s, t) \leq d_{G-v}(s, t)$ が成立する。
 また、Path Cover Lemma と $w$ の定義より、 $d_{G-v}(s, t) \leq d_{G-v}(s, t)$ が成立する。
 したがって、$d_{G-v}(s, t) = d_{G-w}(s, t)$が成立する。
-:::
+
+</div>
+</details>
 
 Bottleneck Lemmaにより、$d_{G - [x, y]}(s, t)$ は計算する必要がないことがわかります。
 代わりに上記に記載した $w$ (以下、Bottleneck 頂点)を計算すれば良いです。
@@ -157,22 +194,28 @@ Bottleneck Lemmaにより、$d_{G - [x, y]}(s, t)$ は計算する必要がな�
 
 ### 辞書順最小最短経路の構築
 まず、各頂点を根とする最短経路木を構築します。ここでは、「最短経路木を一意にする」「部分パスを共通化」するという目的で辞書順最小最短経路木を構築することとします。「最短経路木を一意にする」というのは特に異論はないと思いますが、「部分パスを共通化」するというのは以下のような性質を表します。
-::: success
+<div class="theorem-block" data-type="success" markdown="1">
+<div class="theorem-title">Note</div>
+
 <b>性質1</b> : 
 全ての頂点対 $(s, t) \in V^2$  に対する頂点 $s$ から頂点 $t$ への辞書順最小最短経路を $\pi_G(s, t)$ と表す。この時、任意の頂点対 $(s, t)$ に対して以下が条件が成立する。
 条件 : $\pi_G(s, t)$ 中の任意の subpath $\pi_G(s, t)[x, y]$ は、 $\pi_G(x, y)$ に等しい。
-:::
+
+</div>
 距離が等しいことは自明ですが、構築した最短経路がこの性質を満たすことを保証するために辞書順最小最短経路を採用します。
 構築した頂点 $v$ を根とする最短経路木を $T_v$ と表記します。構築方法は、最短経路DAGを構築後にDFSで小さい頂点を優先的に選択すれば十分です。
 
 ### サンプリング
 
 以下の性質を満たす $\log n + 1$ 個の頂点集合 $R_0, R_2, \dots, R_{\log n}$ を考えます。
-::: property 
+<div class="theorem-block" data-type="property" markdown="1">
+<div class="theorem-title">Property</div>
+
 1. $R_0 = V$
 2. 任意の $1 \leq i \leq \log n$ に対して、 $|R_i| = O(n \log n/2^i)$
 3. 任意の $1 \leq i \leq \log n$ に対して、 $\pi_G(\cdot, \cdot)$ 中の ホップ数 $2^i$ を持つ任意の最短経路中には $R_i$ 中の頂点の少なくとも1つ存在する。
-:::
+
+</div>
 
 これは、パス中における出現回数の多い頂点から順に選択することで達成可能です。(証明は鳩の巣原理と減少率を考えれば...)
 
@@ -191,7 +234,9 @@ Bottleneck Lemmaにより、$d_{G - [x, y]}(s, t)$ は計算する必要がな�
 ### 3.1 ナイーブなアルゴリズムの高速化
 単一始点 $s$ を固定します。任意の故障頂点 $v$ と終点 $t$ に対して $d_{G-v}(s, t)$ を計算するアルゴリズムを考えます。ナイーブなアルゴリズムでは $O(mn\log n)$ 時間で計算可能ですが、少し工夫することで $s$ を根とする最短経路木の高さ $h$ に対して $O(mh\log n)$ 時間で計算することができます。アルゴリズムはシンプルで、各故障頂点 $v$ に対して、$T_s(v)$ 中の頂点のみの距離を初期化しダイクストラ法を開始します。
 
-:::algorithm Naive Single Source Replacement Path Algorithm
+<div class="theorem-block" data-type="algorithm" markdown="1">
+<div class="theorem-title">Algorithm : Naive Single Source Replacement Path Algorithm</div>
+
 <b>Input :</b>
 - $G$ : 正の辺重み付き有向グラフ
 - $s$ : 始点, $v$ : 故障頂点
@@ -205,7 +250,8 @@ Bottleneck Lemmaにより、$d_{G - [x, y]}(s, t)$ は計算する必要がな�
 <b>Algorithm :</b>
 1. 任意の各頂点 $t \in T_s(v) \setminus \{v\}$ に対して、$ans[t]$ = 
 
-:::
+
+</div>
 
 ### クエリ処理
 qeuryとして与えらた始点、終点、故障頂点をそれぞれ $s, t, v$とします。

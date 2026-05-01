@@ -1,3 +1,14 @@
+---
+title: All Pairs Shortest Paths via Faster Matrix Multiplication
+category: graph-algorithm
+category_label: Graph Algorithm
+summary: 行列積を用いた最短経路の計算について勉強したのでメモ
+date: 2026-04-24
+tags:
+  - shortest path
+  - APSP
+  - matrix multiplication
+---
 # All Pairs Shortest Paths via Faster Matrix Multiplication
 
 行列積を用いた最短経路の計算について勉強したのでメモ
@@ -26,11 +37,14 @@ $C$ を出力してください．
 
 ちなみに余談ですが，MMの計算ではなく判定問題版も存在します．
 
-:::problem Matrix Multiplication（判定版）
+<div class="theorem-block" data-type="problem" markdown="1">
+<div class="theorem-title">Problem : Matrix Multiplication（判定版）</div>
+
 
 $n\times n$ 行列 $A, B, C$ が与えられます． $C = A \times B$ かどうかを判定してください．
 
-:::
+
+</div>
 
 実は，この問題を $\tilde{O}(n^2)$ 時間で解く乱択アルゴリズム（モンテカルロ）が存在します．
 詳しくは，[この辺の記事](https://tech.preferred.jp/ja/blog/matrix-multiplication-and-polynomial-identity/)を見てみると分かりよいと思います．
@@ -39,13 +53,16 @@ $n\times n$ 行列 $A, B, C$ が与えられます． $C = A \times B$ かどう
 
 以下で定義する問題を All Pairs Shortest Paths Problem （以下，APSP）と呼びます．
 
-:::problem
+<div class="theorem-block" data-type="problem" markdown="1">
+<div class="theorem-title">Problem</div>
+
 
 **All Pairs Shortest Paths**
 
 $n$ 頂点 $m$ 辺のグラフが与えられます．任意の2頂点間の最短距離を出力してください．
 
-:::
+
+</div>
 
 上記の問題はかなり曖昧に書いており，例えば重み関数の値域（ $\mathbb{N}, \mathbb{R}, \mathbb{F}, \mathbb{R_{\ge 0}}$ ）や有向or無向など様々な問題設定を考えることができます．
 
@@ -67,7 +84,9 @@ APSPは様々なアルゴリズムが知られており，[Wikipedia](https://en
 
 ここで，「+したもののminを取る」という操作に置き換えたものを (min, +)-MM 呼びます．具体的には以下のような問題となります．
 
-:::problem (min, +)-Matrix Multiplication
+<div class="theorem-block" data-type="problem" markdown="1">
+<div class="theorem-title">Problem : (min, +)-Matrix Multiplication</div>
+
 
 $n\times n$ 行列 $A, B$ が与えられます． $n \times n$ 行列 $C=A \otimes B$ を以下で定義します．
 
@@ -77,13 +96,16 @@ $$
 
 $C$ を出力してください．
 
-:::
+
+</div>
 
 これは，(min, +)-semiringと呼ばれる半環上の演算となっています．もちろん， 愚直に計算すると $O(n^3)$ 時間で計算できるわけですが，「MMと同等の計算時間で解けるか？」という問いに対しては簡単にYesということは出来ません．
 
 実は，上記の演算をグラフの隣接行列同士に適用すると1hop先の最短距離を計算することができます．すなわち，以下が成立します．
 
-:::claim
+<div class="theorem-block" data-type="claim" markdown="1">
+<div class="theorem-title">Claim</div>
+
 
 任意の $n$ 頂点のグラフの隣接行列を $A$ とする．（ただし，辺が存在しない要素については $\infty$ ， $A_{i, i} = 0$ とする ）
 また， 任意 $1 \le h < n$ に対して， $n \times n$ 行列 $B$ を以下で定義する．（ただし，累乗は(min, +)-MMを $h-1$ 回適用しているものとする）
@@ -94,7 +116,8 @@ $$
 
 このとき，任意の２頂点 $s,t$  に対して， $s-t$ 間のパスであり $h-1$ hop 以下 であるようなものの最小値は $B_{s, t}$ である． 
 
-:::
+
+</div>
 
 任意の2頂点間の最短経路のhop長は高々 $n-1$ であることから，この演算を $n-1$ 回行うことでAPSPを解くことができます．
 
@@ -108,21 +131,26 @@ $$
 
 変換の手順は，以下の通りです．
 
-:::algorithm (min, +)-MM から (+, ×)-MM へのインスタンス変換
+<div class="theorem-block" data-type="algorithm" markdown="1">
+<div class="theorem-title">Algorithm : (min, +)-MM から (+, ×)-MM へのインスタンス変換</div>
+
 
 **入力** : $n \times n$ 行列 $A, B \in [-M, M]^{n \times n}$
 
 **出力** : $n \times n$ 行列 $A', B' \in [-O(n^M), O(n^M)]^{n \times n}$
 
 1. 整数 $b$ を $2n < b < 3n$ となるように適当にとる（これは適当でよくて，とりあえず $n < b$ かつ $b=O(n)$ だったらなんでもよいはず… ）
-2. $n \times n$ 行列 $A', B'$ を $A'_{i, j} = b^{2M-A_{i, j}}, B'_{i, j} = b^{2M-B_{i, j}}$ とする．
-:::
+2. $n \times n$ 行列 $A', B'$ を {::nomarkdown}$A'_{i, j} = b^{2M-A_{i, j}}, B'_{i, j} = b^{2M-B_{i, j}}${:/nomarkdown} とする．
+
+</div>
 
 実はこのような変換を行い $A’ \times B’$ を計算することで元の $A \otimes B$ も計算できます．
 
 具体的には，以下の主張が成立します．
 
-:::claim
+<div class="theorem-block" data-type="claim" markdown="1">
+<div class="theorem-title">Claim</div>
+
 
 $A \otimes B = C, A’ \times B’ = C’$ とする．
 
@@ -132,7 +160,8 @@ $$
 C_{i, j} = 4M - (C'_{i, j} の b 進表記における桁数)
 $$
 
-:::
+
+</div>
 
 証明は省略しますが， $b>n$ と取ることで $C’_{i, j}$ の計算時に（b進表記で）繰り上がりが発生しないように調整しています．したがって，そのまま桁数が(min, +)-MMを表すようになっています．
 
@@ -163,17 +192,23 @@ APSPインスタンスにおけるグラフの重み関数を $[-M, M]$ とす�
 
 上記の論文の主結果は，以下になります．
 
-:::theorem
+<div class="theorem-block" data-type="theorem" markdown="1">
+<div class="theorem-title">Theorem</div>
+
 
 $n$ 頂点の重み無し無向グラフに対するAPSPは， $O(\log n)$ 回のBoolean Matrix Multiplicationを行うことで計算可能である．このとき，全体の時間計算量は $\tilde{O}(n^\omega)$ となる．
 
-:::
 
-:::theorem
+</div>
+
+<div class="theorem-block" data-type="theorem" markdown="1">
+<div class="theorem-title">Theorem</div>
+
 
 $n$ 頂点の $[-M, M]$ の整数重み付き無向グラフに対するAPSPは， $O(\log Mn)$ 回の Matrix Multiplication を行うことで計算可能である．このとき，全体の時間計算量は $\tilde{O}(Mn^\omega)$ となる．
 
-:::
+
+</div>
 
 - Boolean Matrix Multiplicationとは？
     
@@ -202,7 +237,9 @@ $$
 
 上記の各行列 $C^k$ は， $\Delta_{i, j}$ の (2進表記で) $k$ bit 目が立っているかを表してます． したがって，以下の式が成立するため復元することが出来ます．
 
-:::claim
+<div class="theorem-block" data-type="claim" markdown="1">
+<div class="theorem-title">Claim</div>
+
 
 任意の $1 \le i, j \le n$ に対して，以下が成立する．
 
@@ -210,7 +247,8 @@ $$
 \Delta_{i, j} = \sum_{k = 0}^\ell 2^k \cdot (1-C^k_{i, j})
 $$
 
-:::
+
+</div>
 
 この $C$ を計算するために，別で 5つの行列 $A, B, D, P, Q$ を定義します． $C$ と同様にそれぞれ $\ell+1$ 個存在するため，各 $0 \le k < \ell$ に対して， $A^k, B^k, D^k, P^k, Q^k$ と表します．また，それぞれの定義は以下になります．
 
@@ -270,7 +308,9 @@ $$
     $\lnot X$ : 各要素のnot
     
 
-:::algorithm
+<div class="theorem-block" data-type="algorithm" markdown="1">
+<div class="theorem-title">Algorithm</div>
+
 
 **$A, B$ の計算**
 
@@ -282,9 +322,13 @@ $$
 - for $i = 1, 2, \dots, \ell$
     - $A^k \gets A^{k-1} \cdot B^{k-1}$
     - $B^k \gets B^{k-1} \cdot B^{k-1}$
-:::
 
-:::proof
+</div>
+
+<details class="proof-block" markdown="1">
+<summary class="proof-title">Proof</summary>
+<div class="proof-body" markdown="1">
+
 - Algorithm2で $A, B$ が計算できることの Proof Sketch
     
     $A^k_{i, j}$ では以下の値を計算している．
@@ -296,11 +340,15 @@ $$
     これはすなわち，頂点 $i$ から 頂点 $k’$ への長さ $2^k-1$ 未満のパスが存在するかつ頂点 $k’$ から頂点 $j$ への長さ $2^k$ へのパスが存在するかという演算を表している．
     
     $B$ についても同様
-:::
+
+</div>
+</details>
 
 次に， $C(, D, P, Q)$ を計算します．これは，ボトムアップに計算することができます．
 
-:::algorithm
+<div class="theorem-block" data-type="algorithm" markdown="1">
+<div class="theorem-title">Algorithm</div>
+
 
 **$C(, D, P, Q)$ の計算**
 
@@ -314,9 +362,13 @@ $$
     - $D^k \gets ((P^{k+1} \cdot B^k) \land C^{k+1}) \lor ((Q^{k+1} \cdot B^k) \land \lnot C^{k+1})$
     - $P^k \gets P^{k+1} \lor Q^{k+1}$
     - $Q^k \gets D^k \land \lnot C^k$
-:::
 
-:::proof
+</div>
+
+<details class="proof-block" markdown="1">
+<summary class="proof-title">Proof</summary>
+<div class="proof-body" markdown="1">
+
 - $P, Q$ が計算できることのProof Sketch
     
     $P^k$ について…
@@ -334,21 +386,29 @@ $$
     $$
     m \bmod 2^{k+1} = 2^k \Leftrightarrow (0 \le m \bmod 2^{k+1} \le 2^k) \land \lnot (0 \le m \bmod 2^{k+1} < 2^k)  
     $$
-:::
+
+</div>
+</details>
 
 $C, D$ が成立することはかなり非自明です． $C, D$ の証明方法はほとんど同じなため，今回は $C$ のみ示します．
 
 論文では，以下の（論文中の）補題2.1&2.2を経由して解いています．今回は，一般化せず以下が成立することだけを示します．
 
-:::lemma
+<div class="theorem-block" data-type="lemma" markdown="1">
+<div class="theorem-title">Lemma</div>
+
 
 $P^{k+1} \cdot A^k$ の $(i, j)$ 成分を $\delta_{i, j}$ とする．任意の $i, j$ に対して以下の2つが成立する．
 
 1. $0 \le \Delta_{i, j} \bmod 2^{k+2} < 2^k \Rightarrow \delta_{i, j} = 1$
 2. $\delta_{i, j} = 1 \Rightarrow -2^{k} < \Delta_{i, j} \bmod 2^{k+2} < 2^k$
-:::
 
-:::proof
+</div>
+
+<details class="proof-block" markdown="1">
+<summary class="proof-title">Proof</summary>
+<div class="proof-body" markdown="1">
+
     
     **1の証明**
     
@@ -366,11 +426,15 @@ $P^{k+1} \cdot A^k$ の $(i, j)$ 成分を $\delta_{i, j}$ とする．任意の
     
     よって，2が成立する．
     
-:::
+
+</div>
+</details>
 
 上記の補題により，以下の系が容易に導けます．
 
-:::corollary
+<div class="theorem-block" data-type="corollary" markdown="1">
+<div class="theorem-title">Corollary</div>
+
 
 $(P^{k+1} \cdot A^k) \land C^{k+1}$ の $(i, j)$ 成分を $\delta_{i, j}$ とする．任意の $i, j$ に対して以下が成立する．
 
@@ -378,11 +442,14 @@ $$
 0 \le \Delta_{i, j} \bmod 2^{k+2} < 2^k \Leftrightarrow \delta_{i, j} = 1
 $$
 
-:::
+
+</div>
 
 同じ議論をすると，以下の系も容易に導けます．
 
-:::corollary
+<div class="theorem-block" data-type="corollary" markdown="1">
+<div class="theorem-title">Corollary</div>
+
 
 $(Q^{k+1} \cdot A^k) \land \lnot C^{k+1}$ の $(i, j)$ 成分を $\delta_{i, j}$ とする．任意の $i, j$ に対して以下が成立する．
 
@@ -390,7 +457,8 @@ $$
 2^{k+1} \le \Delta_{i, j} \bmod 2^{k+2} < 2^{k+1} + 2^k \Leftrightarrow \delta_{i, j} = 1
 $$
 
-:::
+
+</div>
 
 上記の2つの系により $C^k$ が正しく計算できていることが証明できます． 
 
