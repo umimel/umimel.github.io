@@ -8,15 +8,19 @@ section: home
 <div class="markdown">
   <h2>Recent Notes</h2>
   <div class="card-grid">
-    {% assign notes = site.pages | where_exp: "item", "item.section == 'articles' and item.category" | sort: "date" | reverse %}
-    {% for note in notes limit: 6 %}
-      <a class="card" href="{{ note.url | relative_url }}">
-        <h3>{{ note.title }}</h3>
-        {% if note.date %}
-          <time class="card-date" datetime="{{ note.date | date: '%Y-%m-%d' }}">{{ note.date | date: '%Y-%m-%d' }}</time>
-        {% endif %}
-        <p>{{ note.summary | default: note.excerpt | strip_html | truncate: 120 }}</p>
-      </a>
+    {% assign notes = site.pages | where: "section", "articles" | sort: "date" | reverse %}
+    {% assign shown_notes = 0 %}
+    {% for note in notes %}
+      {% if note.category and shown_notes < 6 %}
+        <a class="card" href="{{ note.url | relative_url }}">
+          <h3>{{ note.title }}</h3>
+          {% if note.date %}
+            <time class="card-date" datetime="{{ note.date | date: '%Y-%m-%d' }}">{{ note.date | date: '%Y-%m-%d' }}</time>
+          {% endif %}
+          <p>{{ note.summary | default: note.excerpt | strip_html | truncate: 120 }}</p>
+        </a>
+        {% assign shown_notes = shown_notes | plus: 1 %}
+      {% endif %}
     {% endfor %}
   </div>
 </div>

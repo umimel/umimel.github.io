@@ -7,8 +7,8 @@ lead: テーマ別に整理された記事一覧です。
 section: articles
 ---
 <div class="markdown">
-  {% assign notes = site.pages | where_exp: "item", "item.section == 'articles' and item.category" | sort: "date" | reverse %}
-  {% capture tags_buffer %}{% for note in notes %}{% for tag in note.tags %}{{ tag | strip }}|||{% endfor %}{% endfor %}{% endcapture %}
+  {% assign notes = site.pages | where: "section", "articles" | sort: "date" | reverse %}
+  {% capture tags_buffer %}{% for note in notes %}{% if note.category %}{% for tag in note.tags %}{{ tag | strip }}|||{% endfor %}{% endif %}{% endfor %}{% endcapture %}
   {% assign all_tags = tags_buffer | split: "|||" | uniq | sort %}
   <div class="tag-panel" data-tag-panel>
     <div class="tag-panel-header">
