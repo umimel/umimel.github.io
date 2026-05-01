@@ -1,0 +1,28 @@
+title: AlgoNote
+description: アルゴリズムと数学の学習メモ
+lang: ja
+timezone: Asia/Tokyo
+url: "https://umimel.github.io"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+defaults:
+  - scope:
+      path: "articles"
+      type: "pages"
+    values:
+      layout: article
+      section: articles
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - scripts/generate_manifest.py

@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<article class="markdown article-body">
+  {% if page.tags %}
+    <div class="article-tags" aria-label="Tags">
+      {% for tag in page.tags %}
+        <span class="tag-pill">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {{ content }}
+</article>

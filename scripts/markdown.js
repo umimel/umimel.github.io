@@ -74,16 +74,7 @@
 
   function renderWithEnvironments(text) {
     const segments = splitByFence(text);
-    const counters = {
-      theorem: 0,
-      lemma: 0,
-      corollary: 0,
-      property: 0,
-      definition: 0,
-      claim: 0,
-      algorithm: 0,
-      problem: 0,
-    };
+    const counters = {};
     let html = '';
     segments.forEach((seg) => {
       if (seg.type === 'code') {
@@ -118,7 +109,7 @@
   }
 
   function renderTextWithEnvironments(text, counters) {
-    const envs = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'claim', 'algorithm', 'problem', 'proof']);
+    const envs = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'claim', 'algorithm', 'problem', 'info', 'success', 'note', 'proof']);
     const lines = text.split(/\r?\n/);
     let out = '';
     let buffer = [];
@@ -133,10 +124,11 @@
     while (i < lines.length) {
       const line = lines[i];
       const trimmed = line.trim();
-      const match = trimmed.match(/^:::(\w+)?(?:\s+(.+))?\s*$/);
+      const match = trimmed.match(/^:::\s*([a-zA-Z][\w-]*)?(?:\s+(.+))?\s*$/);
 
-      if (match && (!match[1] || envs.has(match[1]))) {
-        const name = match[1] || 'plain';
+      const normalizedName = match && match[1] ? match[1].toLowerCase() : '';
+      if (match && (!normalizedName || envs.has(normalizedName))) {
+        const name = normalizedName || 'plain';
         const title = match[2] ? match[2].trim() : '';
         flushBuffer();
         i += 1;
@@ -152,8 +144,7 @@
         } else if (name === 'proof') {
           out += buildProofBlock(bodyHtml, title);
         } else {
-          counters[name] = (counters[name] || 0) + 1;
-          out += buildEnvBlock(name, counters[name], bodyHtml, title);
+          out += buildEnvBlock(name, bodyHtml, title, counters);
         }
         i += 1;
         continue;
@@ -165,7 +156,7 @@
 
     flushBuffer();
 
-    const envsRegex = '(theorem|lemma|corollary|property|definition|claim|algorithm|problem|proof)';
+    const envsRegex = '(theorem|lemma|corollary|property|definition|claim|algorithm|problem|info|success|note|proof)';
     const re = new RegExp('\\\\\\\\begin\\\\{' + envsRegex + '\\\\}([\\\\s\\\\S]*?)\\\\\\\\end\\\\{\\\\1\\\\}', 'g');
     if (re.test(out)) {
       out = out.replace(re, function (_, name, body) {
@@ -173,8 +164,7 @@
       if (name === 'proof') {
         return buildProofBlock(bodyHtml);
       }
-        counters[name] = (counters[name] || 0) + 1;
-        return buildEnvBlock(name, counters[name], bodyHtml);
+        return buildEnvBlock(name, bodyHtml, '', counters);
       });
     }
     return out;
@@ -214,7 +204,7 @@
     return out;
   }
 
-  function buildEnvBlock(name, index, bodyHtml, title) {
+  function buildEnvBlock(name, bodyHtml, title, counters) {
     const labels = {
       theorem: 'Theorem',
       lemma: 'Lemma',
@@ -224,12 +214,17 @@
       claim: 'Claim',
       algorithm: 'Algorithm',
       problem: 'Problem',
+      info: 'Info',
+      success: 'Note',
+      note: 'Note',
     };
     const label = labels[name] || name;
+    const numberedTypes = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'claim', 'algorithm', 'problem']);
+    const number = numberedTypes.has(name) ? ' ' + ((counters[name] = (counters[name] || 0) + 1)) : '';
     const suffix = title ? ' : ' + title : '';
     return (
       '<div class="theorem-block" data-type="' + name + '">' +
-        '<div class="theorem-title">' + label + index + suffix + '</div>' +
+        '<div class="theorem-title">' + label + number + suffix + '</div>' +
         '<div class="theorem-body">' + bodyHtml + '</div>' +
       '</div>'
     );
@@ -264,8 +259,8 @@
     const items = headings.map((h) => {
       const level = h.tagName.toLowerCase();
       return (
-        '<a class="toc-item toc-' + level + '" href="#' + h.id + '">' +
-          h.textContent +
+        '<a class="toc-item toc-' + level + '" href="#' + h.id + '" data-toc-target="' + h.id + '">' +
+          tocText(h) +
         '</a>'
       );
     }).join('');
@@ -273,7 +268,54 @@
     const toc = document.createElement('div');
     toc.className = 'toc-float';
     toc.innerHTML = '<div class="toc-title">目次</div>' + items;
-    container.appendChild(toc);
+    const page = container.closest('.page');
+    if (page) page.appendChild(toc);
+    else container.appendChild(toc);
+    observeToc(headings, toc);
+  }
+
+  function observeToc(headings, toc) {
+    const links = new Map(Array.from(toc.querySelectorAll('[data-toc-target]')).map((link) => [link.dataset.tocTarget, link]));
+    const setActive = (id) => {
+      links.forEach((link, key) => {
+        const active = key === id;
+        link.classList.toggle('active', active);
+        if (active) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    setActive(headings[0].id);
+    if (typeof IntersectionObserver === 'undefined') return;
+
+    const visible = new Map();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visible.set(entry.target.id, entry.boundingClientRect.top);
+        else visible.delete(entry.target.id);
+      });
+      if (visible.size) {
+        setActive(Array.from(visible.entries()).sort((a, b) => Math.abs(a[1]) - Math.abs(b[1]))[0][0]);
+      }
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 1] });
+    headings.forEach((heading) => observer.observe(heading));
+  }
+
+  function tocText(node) {
+    let text = '';
+    node.childNodes.forEach((child) => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        text += child.textContent;
+        return;
+      }
+      if (child.nodeType !== Node.ELEMENT_NODE) return;
+      if (child.classList.contains('katex')) {
+        const annotation = child.querySelector('annotation');
+        text += annotation ? annotation.textContent : child.textContent;
+        return;
+      }
+      text += tocText(child);
+    });
+    return text.replace(/\s+/g, ' ').trim();
   }
 
   function groupByCategory(items, categories) {

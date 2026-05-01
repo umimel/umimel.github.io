@@ -1,54 +1,22 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AlgoNote</title>
-    <link rel="stylesheet" href="stylesheet.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Serif:wght@400;600&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  </head>
-  <body>
-    <div class="app">
-      <aside class="sidebar">
-        <a class="brand" href="index.html">AlgoNote</a>
-        <div class="sidebar-section">
-          <div class="sidebar-label">Workspace</div>
-          <nav class="tree">
-            <a class="tree-item active" href="index.html">Home</a>
-            <a class="tree-item" href="contents/article.html">Articles</a>
-            <a class="tree-item" href="contents/profile.html">Profile</a>
-          </nav>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-label">Themes</div>
-          <nav class="tree">
-            <a class="tree-item" href="contents/article.html?cat=algorithms">アルゴリズム</a>
-            <a class="tree-item" href="contents/article.html?cat=graphs">グラフ</a>
-            <a class="tree-item" href="contents/article.html?cat=data-structures">データ構造</a>
-            <a class="tree-item" href="contents/article.html?cat=math">数学</a>
-          </nav>
-        </div>
-      </aside>
-      <main class="workspace">
-        <div class="topbar">
-          <div>
-            <div class="breadcrumb">Home</div>
-            <h1 class="page-title">Articles</h1>
-            <p class="page-lead">テーマ別にカテゴリ分けした記事一覧です。</p>
-          </div>
-          <div class="search">Search notes</div>
-        </div>
-        <section class="page">
-          <div class="markdown" data-md-dir="articles"></div>
-        </section>
-      </main>
-    </div>
-      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-    <script src="scripts/markdown.js"></script>
-  </body>
-</html>
+---
+title: Home
+heading: AlgoNote
+breadcrumb: Home
+lead: アルゴリズム・研究関連の学習メモです．
+section: home
+---
+<div class="markdown">
+  <h2>Recent Notes</h2>
+  <div class="card-grid">
+    {% assign notes = site.pages | where_exp: "item", "item.section == 'articles' and item.category" | sort: "date" | reverse %}
+    {% for note in notes limit: 6 %}
+      <a class="card" href="{{ note.url | relative_url }}">
+        <h3>{{ note.title }}</h3>
+        {% if note.date %}
+          <time class="card-date" datetime="{{ note.date | date: '%Y-%m-%d' }}">{{ note.date | date: '%Y-%m-%d' }}</time>
+        {% endif %}
+        <p>{{ note.summary | default: note.excerpt | strip_html | truncate: 120 }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</div>
