@@ -1,0 +1,25 @@
+<svg width="1495" height="1229" viewBox="0 0 1495 1229" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" overflow="hidden">
+  <g transform="translate(-2355 -1090)">
+    <path d="M3035 1343.5C3035 1314.51 3058.28 1291 3087 1291 3115.72 1291 3139 1314.51 3139 1343.5 3139 1372.49 3115.72 1396 3087 1396 3058.28 1396 3035 1372.49 3035 1343.5Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="#DAE3F3" fill-rule="evenodd"/>
+    <path d="M2365 2236 2531.5 1648 2698 2236Z" stroke="#000000" stroke-width="10.3125" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="none" fill-rule="evenodd"/>
+    <path d="M2747 2236 2913.5 1648 3080 2236Z" stroke="#000000" stroke-width="10.3125" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="none" fill-rule="evenodd"/>
+    <path d="M3129 2236 3295.5 1648 3462 2236Z" stroke="#000000" stroke-width="10.3125" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="none" fill-rule="evenodd"/>
+    <path d="M3511 2236 3677.5 1648 3844 2236Z" stroke="#000000" stroke-width="10.3125" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="none" fill-rule="evenodd"/>
+
+    <path d="M2.66825-4.41218 497.928 295.095 492.591 303.919-2.66825 4.41218ZM482.654 265.588 504.016 304.803 459.366 304.096C456.519 304.051 454.247 301.706 454.292 298.859 454.337 296.011 456.682 293.74 459.529 293.785L495.341 294.351 490.732 301.974 473.598 270.522C472.235 268.021 473.158 264.889 475.659 263.527 478.16 262.165 481.291 263.088 482.654 265.588Z" fill="#000000" fill-rule="nonzero" transform="matrix(1 0 0 -1 2531 1647.79)"/>
+    <path d="M4.58875-2.35166 137.171 256.353 127.993 261.056-4.58875 2.35166ZM139.681 223.222 137.249 267.812 99.6328 243.746C97.2339 242.212 96.5334 239.023 98.068 236.624 99.6027 234.225 102.791 233.525 105.19 235.06L135.361 254.361 127.433 258.424 129.384 222.661C129.539 219.817 131.97 217.638 134.814 217.793 137.657 217.948 139.836 220.379 139.681 223.222Z" fill="#000000" fill-rule="nonzero" transform="matrix(1 0 0 -1 2913 1647.79)"/>
+    <path d="M3285.74 1641.98 3119.66 1382.78 3128.34 1377.22 3294.42 1636.41ZM3293.74 1603.19 3295.6 1647.81 3255.85 1627.47C3253.31 1626.18 3252.31 1623.07 3253.61 1620.53 3254.9 1618 3258.01 1616.99 3260.54 1618.29L3292.43 1634.6 3284.93 1639.41 3283.43 1603.62C3283.32 1600.78 3285.53 1598.38 3288.37 1598.26 3291.22 1598.14 3293.62 1600.35 3293.74 1603.19Z" fill="#000000" fill-rule="nonzero"/>
+    <path d="M3665.92 1647.25 3136.46 1347.49 3141.54 1338.51 3671 1638.27ZM3654.89 1609.22 3677.37 1647.8 3632.72 1648.38C3629.87 1648.42 3627.53 1646.14 3627.49 1643.29 3627.46 1640.44 3629.74 1638.1 3632.58 1638.07L3668.4 1637.6 3664.01 1645.36 3645.98 1614.41C3644.54 1611.95 3645.38 1608.79 3647.84 1607.36 3650.3 1605.92 3653.45 1606.76 3654.89 1609.22Z" fill="#000000" fill-rule="nonzero"/>
+
+    <path d="M2582 2003.5 2556.75 2003.5 2556.75 2091 2506.25 2091 2506.25 2003.5 2481 2003.5 2531.5 1953Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" fill="#DAE3F3" fill-rule="evenodd"/>
+    <path d="M2964 2003.5 2938.75 2003.5 2938.75 2091 2888.25 2091 2888.25 2003.5 2863 2003.5 2913.5 1953Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" fill="#DAE3F3" fill-rule="evenodd"/>
+    <path d="M3245 2041 3270 2041 3270 1953 3320 1953 3320 2041 3345 2041 3295 2091Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" fill="#DAE3F3" fill-rule="evenodd"/>
+    <path d="M3627 2041 3652 2041 3652 1953 3702 1953 3702 2041 3727 2041 3677 2091Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" fill="#DAE3F3" fill-rule="evenodd"/>
+
+    <text x="3087" y="1237" fill="#000000" font-family="MS Gothic, sans-serif" font-size="110" text-anchor="middle">中心</text>
+    <text x="2531.5" y="2206" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="112" text-anchor="middle">In</text>
+    <text x="2913.5" y="2206" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="112" text-anchor="middle">In</text>
+    <text x="3295.5" y="2206" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="112" text-anchor="middle">Out</text>
+    <text x="3677.5" y="2206" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="112" text-anchor="middle">Out</text>
+  </g>
+</svg>
