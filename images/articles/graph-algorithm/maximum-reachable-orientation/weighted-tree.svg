@@ -1,0 +1,19 @@
+<svg width="1379" height="784" viewBox="0 0 1379 784" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" overflow="hidden">
+  <g transform="translate(-1219 -1434)">
+    <path d="M1240 1553C1240 1502.74 1280.74 1462 1331 1462 1381.26 1462 1422 1502.74 1422 1553 1422 1603.26 1381.26 1644 1331 1644 1280.74 1644 1240 1603.26 1240 1553Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="#FFFFFF" fill-rule="evenodd"/>
+    <text x="1331" y="1553" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="96" text-anchor="middle" dominant-baseline="central">3</text>
+
+    <path d="M1396 2061C1396 2010.74 1436.74 1970 1487 1970 1537.26 1970 1578 2010.74 1578 2061 1578 2111.26 1537.26 2152 1487 2152 1436.74 2152 1396 2111.26 1396 2061Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="#FFFFFF" fill-rule="evenodd"/>
+    <text x="1487" y="2061" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="96" text-anchor="middle" dominant-baseline="central">1</text>
+
+    <path d="M1807 1782C1807 1731.74 1847.74 1691 1898 1691 1948.26 1691 1989 1731.74 1989 1782 1989 1832.26 1948.26 1873 1898 1873 1847.74 1873 1807 1832.26 1807 1782Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="#FFFFFF" fill-rule="evenodd"/>
+    <text x="1898" y="1782" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="96" text-anchor="middle" dominant-baseline="central">4</text>
+
+    <path d="M2365 1820C2365 1769.74 2405.74 1729 2456 1729 2506.26 1729 2547 1769.74 2547 1820 2547 1870.26 2506.26 1911 2456 1911 2405.74 1911 2365 1870.26 2365 1820Z" stroke="#000000" stroke-width="13.75" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="#FFFFFF" fill-rule="evenodd"/>
+    <text x="2456" y="1820" fill="#000000" font-family="Calibri, Arial, sans-serif" font-size="84" text-anchor="middle" dominant-baseline="central">10</text>
+
+    <path d="M1395 1618 1806.51 1782.08" stroke="#000000" stroke-width="10.3125" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="none" fill-rule="evenodd"/>
+    <path d="M0 0 255.587 215.346" stroke="#000000" stroke-width="10.3125" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="none" fill-rule="evenodd" transform="matrix(1 0 0 -1 1578 2061.35)"/>
+    <path d="M1989 1782 2365.48 1820.22" stroke="#000000" stroke-width="10.3125" stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="10" fill="none" fill-rule="evenodd"/>
+  </g>
+</svg>
