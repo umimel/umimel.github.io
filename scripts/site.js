@@ -109,6 +109,7 @@
       corollary: 'Corollary',
       property: 'Property',
       definition: 'Definition',
+      conjecture: 'Conjecture',
       claim: 'Claim',
       algorithm: 'Algorithm',
       problem: 'Problem',
@@ -167,7 +168,7 @@
   }
 
   function numberEnvironmentBlocks(container, labels) {
-    const numberedTypes = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'claim', 'algorithm', 'problem']);
+    const numberedTypes = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'conjecture', 'claim', 'algorithm', 'problem']);
     const counters = {};
     container.querySelectorAll('.theorem-block[data-type]').forEach((block) => {
       const type = block.dataset.type;

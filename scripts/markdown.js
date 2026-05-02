@@ -109,7 +109,7 @@
   }
 
   function renderTextWithEnvironments(text, counters) {
-    const envs = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'claim', 'algorithm', 'problem', 'info', 'success', 'note', 'proof']);
+    const envs = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'conjecture', 'claim', 'algorithm', 'problem', 'info', 'success', 'note', 'proof']);
     const lines = text.split(/\r?\n/);
     let out = '';
     let buffer = [];
@@ -156,7 +156,7 @@
 
     flushBuffer();
 
-    const envsRegex = '(theorem|lemma|corollary|property|definition|claim|algorithm|problem|info|success|note|proof)';
+    const envsRegex = '(theorem|lemma|corollary|property|definition|conjecture|claim|algorithm|problem|info|success|note|proof)';
     const re = new RegExp('\\\\\\\\begin\\\\{' + envsRegex + '\\\\}([\\\\s\\\\S]*?)\\\\\\\\end\\\\{\\\\1\\\\}', 'g');
     if (re.test(out)) {
       out = out.replace(re, function (_, name, body) {
@@ -211,6 +211,7 @@
       corollary: 'Corollary',
       property: 'Property',
       definition: 'Definition',
+      conjecture: 'Conjecture',
       claim: 'Claim',
       algorithm: 'Algorithm',
       problem: 'Problem',
@@ -219,7 +220,7 @@
       note: 'Note',
     };
     const label = labels[name] || name;
-    const numberedTypes = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'claim', 'algorithm', 'problem']);
+    const numberedTypes = new Set(['theorem', 'lemma', 'corollary', 'property', 'definition', 'conjecture', 'claim', 'algorithm', 'problem']);
     const number = numberedTypes.has(name) ? ' ' + ((counters[name] = (counters[name] || 0) + 1)) : '';
     const suffix = title ? ' : ' + title : '';
     return (

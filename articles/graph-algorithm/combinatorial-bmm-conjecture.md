@@ -5,7 +5,7 @@ category_label: Graph Algorithm
 summary: Combinatorial BMM Conjectureについてのまとめメモ
 date: 2026-04-20
 tags:
-  - conjecture
+  - combinatorial algorithm
   - matrix multiplication
   - triangle detection
 ---
