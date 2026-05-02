@@ -4,6 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: 無向グラフを推移性を満たすように向き付けをするアルゴリズムのメモ
 date: 2026-04-22
+published: true
 tags:
   - orientation
   - comparability

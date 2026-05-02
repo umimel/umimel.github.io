@@ -4,7 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: APSPの2-近似について improve があったので勉強メモ
 date: 2026-05-02
-published: true
+published: false
 tags:
   - shortest paths
   - approximation
