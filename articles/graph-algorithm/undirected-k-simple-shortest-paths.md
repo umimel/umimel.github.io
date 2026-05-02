@@ -4,6 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: 正の重み付き無向グラフにおける特定の2頂点間の最短経路を小さい順に k 個列挙するアルゴリズムのメモ
 date: 2026-04-25
+published: false
 tags:
   - shortest path
   - enumeration

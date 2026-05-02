@@ -4,7 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: 重みなし有向グラフに対する Replacement Paths に対する高速なアルゴリズムのメモ
 date: 2026-04-23
-published: true
+published: false
 tags:
   - shortest paths
   - replacement paths

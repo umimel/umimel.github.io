@@ -4,6 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: "1-VFT Distance Sensitivity Oracle (VFT : Vertex Fault-Tolerant) のメモ"
 date: 2026-04-26
+published: false
 tags:
   - shortest paths
   - distance sensitivity oracle

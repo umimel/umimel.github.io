@@ -4,7 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: 到達可能な頂点対の数を最大化する向きづけに関するアルゴリズム
 date: 2026-05-01
-published: true
+published: false
 tags:
   - orientation
   - reachability

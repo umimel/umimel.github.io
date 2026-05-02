@@ -4,6 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: Combinatorial BMM Conjectureについてのまとめメモ
 date: 2026-04-20
+published: false
 tags:
   - combinatorial algorithm
   - matrix multiplication

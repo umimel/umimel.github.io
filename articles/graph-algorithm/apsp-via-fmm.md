@@ -4,6 +4,7 @@ category: graph-algorithm
 category_label: Graph Algorithm
 summary: 行列積を用いた最短経路の計算について勉強したのでメモ
 date: 2026-04-24
+published: true
 tags:
   - shortest path
   - APSP
