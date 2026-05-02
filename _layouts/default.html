@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <link rel="icon" href="{{ '/images/graph.svg' | relative_url }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{ '/stylesheet.css' | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,10 @@
   <body>
     <div class="app">
       <aside class="sidebar">
-        <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <img class="brand-mark" src="{{ '/images/graph.svg' | relative_url }}" alt="" aria-hidden="true">
+          <span>{{ site.title }}</span>
+        </a>
         <div class="sidebar-section">
           <div class="sidebar-label">Workspace</div>
           <nav class="tree">
