@@ -18,6 +18,12 @@ defaults:
       layout: article
       section: articles
   - scope:
+      path: "libraries"
+      type: "pages"
+    values:
+      layout: library
+      section: library
+  - scope:
       path: ""
     values:
       layout: default

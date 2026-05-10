@@ -1,0 +1,105 @@
+<svg width="1180" height="650" viewBox="0 0 1180 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Subcubic reductions between graph centrality problems, APSP, Diameter, and Negative Triangle</title>
+  <desc id="desc">A diagram based on Figure 18.1 in the APSP Conjecture chapter. Solid arrows are nontrivial reductions and dashed arrows are easy reductions.</desc>
+  <defs>
+    <marker id="arrow-solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#24312b"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#6f7b74"/>
+    </marker>
+    <style>
+      .bg { fill: #fbfcfa; }
+      .node { fill: #ffffff; stroke: #24312b; stroke-width: 2.4; }
+      .node-apsp { fill: #e6f3ef; stroke: #187866; stroke-width: 3; }
+      .node-diameter { fill: #f8f4ee; stroke: #b85b3f; stroke-width: 2.8; }
+      .label { fill: #202522; font-family: "IBM Plex Sans", "Noto Sans JP", Arial, sans-serif; font-size: 22px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; }
+      .small { fill: #46524c; font-family: "IBM Plex Sans", "Noto Sans JP", Arial, sans-serif; font-size: 16px; text-anchor: middle; dominant-baseline: middle; }
+      .solid { fill: none; stroke: #24312b; stroke-width: 3.2; marker-end: url(#arrow-solid); }
+      .dashed { fill: none; stroke: #6f7b74; stroke-width: 2.6; stroke-dasharray: 9 7; marker-end: url(#arrow-dashed); }
+      .legend-line { stroke-width: 3; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1180" height="650" rx="8"/>
+
+  <!-- Easy reductions to APSP. -->
+  <path class="dashed" d="M220 165 C320 95 460 95 560 165"/>
+  <path class="dashed" d="M255 300 C350 275 460 275 560 300"/>
+  <path class="dashed" d="M220 435 C320 505 460 505 560 435"/>
+  <path class="dashed" d="M760 300 C815 300 865 300 915 300"/>
+  <path class="dashed" d="M640 255 C635 225 635 205 640 185"/>
+  <path class="dashed" d="M640 345 C635 375 635 395 640 415"/>
+
+  <!-- Nontrivial reductions considered in the source material. -->
+  <path class="solid" d="M650 165 C650 120 720 105 800 132"/>
+  <path class="solid" d="M650 435 C650 480 720 495 800 468"/>
+  <path class="solid" d="M650 300 C715 300 760 300 815 300"/>
+  <path class="solid" d="M555 300 C475 300 375 300 275 300"/>
+  <path class="solid" d="M930 300 C880 250 800 210 705 170"/>
+  <path class="solid" d="M930 300 C880 350 800 390 705 430"/>
+  <path class="solid" d="M940 300 C900 300 860 300 820 300"/>
+  <path class="solid" d="M930 300 C815 360 695 390 275 435"/>
+
+  <!-- Nodes. -->
+  <g transform="translate(160 165)">
+    <rect class="node" x="-115" y="-54" width="230" height="108" rx="8"/>
+    <text class="label" x="0" y="-12">Betweenness</text>
+    <text class="label" x="0" y="20">Centrality</text>
+  </g>
+
+  <g transform="translate(160 300)">
+    <rect class="node" x="-115" y="-45" width="230" height="90" rx="8"/>
+    <text class="label" x="0" y="0">Radius</text>
+  </g>
+
+  <g transform="translate(160 435)">
+    <rect class="node" x="-115" y="-45" width="230" height="90" rx="8"/>
+    <text class="label" x="0" y="0">Median</text>
+  </g>
+
+  <g transform="translate(650 165)">
+    <rect class="node" x="-115" y="-45" width="230" height="90" rx="8"/>
+    <text class="label" x="0" y="0">Reach Centrality</text>
+  </g>
+
+  <g transform="translate(650 300)">
+    <rect class="node-diameter" x="-115" y="-45" width="230" height="90" rx="8"/>
+    <text class="label" x="0" y="0">Diameter</text>
+  </g>
+
+  <g transform="translate(650 435)">
+    <rect class="node" x="-115" y="-54" width="230" height="108" rx="8"/>
+    <text class="label" x="0" y="-12">Approx. Betw.</text>
+    <text class="label" x="0" y="20">Centrality</text>
+  </g>
+
+  <g transform="translate(970 300)">
+    <rect class="node-apsp" x="-86" y="-45" width="172" height="90" rx="8"/>
+    <text class="label" x="0" y="0">APSP</text>
+  </g>
+
+  <g transform="translate(970 435)">
+    <rect class="node" x="-115" y="-54" width="230" height="108" rx="8"/>
+    <text class="label" x="0" y="-12">Negative</text>
+    <text class="label" x="0" y="20">Triangle</text>
+  </g>
+
+  <!-- Edge annotations, matching the source figure's convention. -->
+  <text class="small" x="395" y="96">easy</text>
+  <text class="small" x="398" y="260">easy</text>
+  <text class="small" x="395" y="520">easy</text>
+  <text class="small" x="705" y="115">Reach ↔ Diameter</text>
+  <text class="small" x="710" y="515">Approx. Betw. ↔ Diameter</text>
+  <text class="small" x="785" y="280">subcubic</text>
+  <text class="small" x="880" y="226">reductions</text>
+  <text class="small" x="872" y="378">reductions</text>
+
+  <!-- Legend. -->
+  <g transform="translate(44 570)">
+    <path d="M0 0 H72" class="solid legend-line"/>
+    <text class="small" x="170" y="0">nontrivial subcubic reduction</text>
+    <path d="M390 0 H462" class="dashed legend-line"/>
+    <text class="small" x="570" y="0">easy reduction</text>
+  </g>
+</svg>

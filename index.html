@@ -6,7 +6,7 @@ lead: アルゴリズム・研究関連の学習メモです．僕はアルゴ�
 section: home
 ---
 <div class="markdown">
-  <h2>Recent Notes</h2>
+  <h2>Latest Articles</h2>
   <div class="card-grid">
     {% assign notes = site.pages | where: "section", "articles" | sort: "date" | reverse %}
     {% assign shown_notes = 0 %}
@@ -20,6 +20,21 @@ section: home
           <p>{{ note.summary | default: note.excerpt | strip_html | truncate: 120 }}</p>
         </a>
         {% assign shown_notes = shown_notes | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <h2>Library</h2>
+  <div class="library-list">
+    {% assign libraries = site.pages | where: "section", "library" | sort: "title" %}
+    {% assign shown_libraries = 0 %}
+    {% for note in libraries %}
+      {% if note.category and shown_libraries < 6 %}
+        <a class="library-list-item" href="{{ note.url | relative_url }}">
+          <span>{{ note.title }}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        {% assign shown_libraries = shown_libraries | plus: 1 %}
       {% endif %}
     {% endfor %}
   </div>

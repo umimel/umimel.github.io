@@ -222,31 +222,46 @@
     });
   }
 
+  function enhanceLibraryLabels(container) {
+    const labels = new Set(['制約', '計算量', '依存関係', '使用例', 'Verify']);
+    container.querySelectorAll('p').forEach((paragraph) => {
+      if (!labels.has(paragraph.textContent.trim())) return;
+      paragraph.classList.add('library-label');
+    });
+  }
+
   function filterCards() {
     const cards = Array.from(document.querySelectorAll('[data-note-card]'));
     if (!cards.length) return;
     const params = new URLSearchParams(window.location.search);
     const category = params.get('cat');
+    const subcategory = params.get('subcat');
     const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
     cards.forEach((card) => {
       const cardTags = (card.dataset.tags || '').split('||').filter(Boolean);
       const matchesCategory = !category || card.dataset.category === category;
+      const matchesSubcategory = !subcategory || card.dataset.subcategory === subcategory;
       const matchesQuery = !query || card.textContent.toLowerCase().includes(query);
       const matchesTags = !selectedTags.size || Array.from(selectedTags).some((tag) => cardTags.includes(tag));
-      card.classList.toggle('is-filtered-out', !(matchesCategory && matchesQuery && matchesTags));
+      card.classList.toggle('is-filtered-out', !(matchesCategory && matchesSubcategory && matchesQuery && matchesTags));
     });
     updateSections();
   }
 
   function updateSections() {
     let visibleSections = 0;
+    document.querySelectorAll('.library-subsection').forEach((section) => {
+      const cards = Array.from(section.querySelectorAll('[data-note-card]'));
+      const hidden = cards.length > 0 && cards.every((card) => card.classList.contains('is-filtered-out'));
+      section.classList.toggle('is-filtered-out', hidden);
+    });
     document.querySelectorAll('.section').forEach((section) => {
       const cards = Array.from(section.querySelectorAll('[data-note-card]'));
       const hidden = cards.length > 0 && cards.every((card) => card.classList.contains('is-filtered-out'));
       section.classList.toggle('is-filtered-out', hidden);
       if (!hidden) visibleSections += 1;
     });
-    const empty = document.querySelector('[data-tag-empty]');
+    const empty = document.querySelector('[data-empty-state], [data-tag-empty]');
     if (empty) empty.classList.toggle('is-filtered-out', visibleSections > 0);
   }
 
@@ -313,6 +328,7 @@
 
   if (article) {
     enhanceEnvironmentBlocks(article);
+    if (article.classList.contains('library-body')) enhanceLibraryLabels(article);
     renderMath(article);
     buildToc(article);
   }
