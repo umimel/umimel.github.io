@@ -1,0 +1,39 @@
+- id: datastructure
+  label: Data Structure
+- id: graph
+  label: Graph
+  children:
+    - id: shortest-path
+      label: Shortest Path
+    - id: cycle
+      label: Cycle
+    - id: spanning-tree
+      label: Spanning Tree
+    - id: connectivity
+      label: Connectivity
+    - id: matching
+      label: Matching
+    - id: flow
+      label: Flow & Cut
+    - id: orientation
+      label: Orientation
+    - id: clique
+      label: Clique
+    - id: recognition
+      label: Recognition
+    - id: other
+      label: Other
+- id: tree
+  label: Tree
+- id: math
+  label: Math
+- id: string
+  label: String
+- id: convolution
+  label: Convolution
+- id: matrix
+  label: Matrix
+- id: polynomial
+  label: Polynomial
+- id: utility
+  label: Utility

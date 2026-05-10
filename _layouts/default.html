@@ -23,6 +23,7 @@
           <nav class="tree">
             <a class="tree-item{% if page.section == 'home' %} active{% endif %}" href="{{ '/' | relative_url }}"><span class="tree-icon" aria-hidden="true">⌂</span><span>Home</span></a>
             <a class="tree-item{% if page.section == 'articles' %} active{% endif %}" href="{{ '/articles/' | relative_url }}"><span class="tree-icon" aria-hidden="true">☰</span><span>Articles</span></a>
+            <a class="tree-item{% if page.section == 'library' %} active{% endif %}" href="{{ '/libraries/' | relative_url }}"><span class="tree-icon" aria-hidden="true"><svg class="tree-svg-icon" viewBox="0 0 24 24" focusable="false"><path d="M5 4.5h5.5c.8 0 1.5.3 1.5.9v14.1c0-.6-.7-.9-1.5-.9H5V4.5Z"></path><path d="M19 4.5h-5.5c-.8 0-1.5.3-1.5.9v14.1c0-.6.7-.9 1.5-.9H19V4.5Z"></path></svg></span><span>Library</span></a>
             <a class="tree-item{% if page.section == 'profile' %} active{% endif %}" href="{{ '/profile/' | relative_url }}"><span class="tree-icon" aria-hidden="true">◐</span><span>Profile</span></a>
           </nav>
         </div>
@@ -31,6 +32,19 @@
           <nav class="tree">
             {% for category in site.data.categories %}
               <a class="tree-item" href="{{ '/articles/' | relative_url }}?cat={{ category.id }}">{{ category.label }}</a>
+            {% endfor %}
+          </nav>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-label">Library</div>
+          <nav class="tree">
+            {% for category in site.data.library_categories %}
+              <a class="tree-item" href="{{ '/libraries/' | relative_url }}?cat={{ category.id }}">{{ category.label }}</a>
+              {% if category.children %}
+                {% for child in category.children %}
+                  <a class="tree-item tree-subitem" href="{{ '/libraries/' | relative_url }}?cat={{ category.id }}&subcat={{ child.id }}">{{ child.label }}</a>
+                {% endfor %}
+              {% endif %}
             {% endfor %}
           </nav>
         </div>
@@ -45,7 +59,7 @@
             {% endif %}
           </div>
           <label class="search" for="note-search">
-            <span>Search notes</span>
+            <span>{% if page.section == 'library' %}Search library{% else %}Search notes{% endif %}</span>
             <input id="note-search" type="search" aria-label="Search notes">
           </label>
         </div>

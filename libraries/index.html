@@ -1,0 +1,70 @@
+---
+title: Library
+layout: default
+heading: Library
+breadcrumb: Library
+lead: umilib の実装メモです。アルゴリズムの概要、依存関係、コード、使い方、verify をまとめます。
+section: library
+---
+<div class="markdown">
+  {% assign notes = site.pages | where: "section", "library" | sort: "title" %}
+  <p class="library-repo-link">
+    Repository: <a href="https://github.com/umimel/umilib" rel="noreferrer">https://github.com/umimel/umilib</a>
+  </p>
+  {% for category in site.data.library_categories %}
+    <section class="section">
+      <h2>{{ category.label }}</h2>
+      {% assign category_notes = notes | where: "category", category.id %}
+      {% if category.children %}
+        <div class="library-group">
+          {% for child in category.children %}
+            {% assign child_notes = category_notes | where: "subcategory", child.id %}
+            <section class="library-subsection">
+              <h3>{{ child.label }}</h3>
+              <div class="library-list">
+                {% for note in child_notes %}
+                  <a class="library-list-item" href="{{ note.url | relative_url }}" data-note-card data-category="{{ category.id }}" data-subcategory="{{ child.id }}">
+                    <span>{{ note.title }}</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                {% else %}
+                  <div class="note-item" data-note-card data-category="{{ category.id }}" data-subcategory="{{ child.id }}">
+                    <div>ライブラリ記事はまだありません。</div>
+                  </div>
+                {% endfor %}
+              </div>
+            </section>
+          {% endfor %}
+          {% assign uncategorized_notes = category_notes | where_exp: "note", "note.subcategory == nil or note.subcategory == ''" %}
+          {% if uncategorized_notes.size > 0 %}
+            <section class="library-subsection">
+              <h3>Other</h3>
+              <div class="library-list">
+                {% for note in uncategorized_notes %}
+                  <a class="library-list-item" href="{{ note.url | relative_url }}" data-note-card data-category="{{ category.id }}" data-subcategory="other">
+                    <span>{{ note.title }}</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                {% endfor %}
+              </div>
+            </section>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="library-list">
+          {% for note in category_notes %}
+            <a class="library-list-item" href="{{ note.url | relative_url }}" data-note-card data-category="{{ category.id }}">
+              <span>{{ note.title }}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          {% else %}
+            <div class="note-item" data-note-card data-category="{{ category.id }}">
+              <div>ライブラリ記事はまだありません。</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </section>
+  {% endfor %}
+  <div class="empty-state is-filtered-out" data-empty-state>条件に一致するライブラリはありません。</div>
+</div>
