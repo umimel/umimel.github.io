@@ -1234,12 +1234,6 @@ input{
   }
 }
 
-@media screen and (max-width: 1100px){
-  .article-figure-grid{
-    grid-template-columns: 1fr;
-  }
-}
-
 @media screen and (max-width: 560px){
   .brand{
     font-size: 1.18rem;

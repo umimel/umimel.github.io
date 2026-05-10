@@ -35,16 +35,23 @@ section: library
               </div>
             </section>
           {% endfor %}
-          {% assign uncategorized_notes = category_notes | where_exp: "note", "note.subcategory == nil or note.subcategory == ''" %}
-          {% if uncategorized_notes.size > 0 %}
+          {% assign uncategorized_count = 0 %}
+          {% for note in category_notes %}
+            {% unless note.subcategory %}
+              {% assign uncategorized_count = uncategorized_count | plus: 1 %}
+            {% endunless %}
+          {% endfor %}
+          {% if uncategorized_count > 0 %}
             <section class="library-subsection">
               <h3>Other</h3>
               <div class="library-list">
-                {% for note in uncategorized_notes %}
+                {% for note in category_notes %}
+                  {% unless note.subcategory %}
                   <a class="library-list-item" href="{{ note.url | relative_url }}" data-note-card data-category="{{ category.id }}" data-subcategory="other">
                     <span>{{ note.title }}</span>
                     <span aria-hidden="true">→</span>
                   </a>
+                  {% endunless %}
                 {% endfor %}
               </div>
             </section>
