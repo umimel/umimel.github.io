@@ -36,7 +36,7 @@ $G$ に含まれる $C_3$ の個数を返します。
 
 計算量
 
-- $O\left(\sum_{(u,v)\in E}\min(\deg(u), \deg(v))\right)$
+- $O\left(m \sqrt{m} \right)$
 
 ## enumerate_3cycles
 
@@ -53,7 +53,7 @@ $G$ に含まれるすべての $C_3$ を返します。
 
 計算量
 
-- $O\left(\sum_{(u,v)\in E}\min(\deg(u), \deg(v)) + T\right)$
+- $O\left( m \sqrt{m} \right)$
 
 ## find_3cycle
 
@@ -70,7 +70,7 @@ $G$ に含まれる $C_3$ を $1$ つ返します。
 
 計算量
 
-- $O\left(\sum_{(u,v)\in E}\min(\deg(u), \deg(v))\right)$
+- $O\left(m \sqrt{m} \right)$
 
 ## find_min_3cycle
 
@@ -87,7 +87,7 @@ $G$ に含まれる $C_3$ のうち、辺重みの総和が最小のものを返
 
 計算量
 
-- $O\left(\sum_{(u,v)\in E}\min(\deg(u), \deg(v)) + T\right)$
+- $O\left(m \sqrt{m} \right)$
 
 ## find_max_3cycle
 
@@ -104,7 +104,7 @@ $G$ に含まれる $C_3$ のうち、辺重みの総和が最大のものを返
 
 計算量
 
-- $O\left(\sum_{(u,v)\in E}\min(\deg(u), \deg(v)) + T\right)$
+- $O\left(m \sqrt{m} \right)$
 
 ## 使用例
 

@@ -223,10 +223,28 @@
   }
 
   function enhanceLibraryLabels(container) {
-    const labels = new Set(['制約', '計算量', '依存関係', '使用例', 'Verify']);
+    const labels = new Set(['制約', '計算量', '依存関係', '使用例', 'Verify', 'Verification']);
     container.querySelectorAll('p').forEach((paragraph) => {
       if (!labels.has(paragraph.textContent.trim())) return;
       paragraph.classList.add('library-label');
+    });
+  }
+
+  function openExternalLinksInNewTab() {
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#')) return;
+
+      let url;
+      try {
+        url = new URL(href, window.location.href);
+      } catch (_) {
+        return;
+      }
+
+      if (url.origin === window.location.origin) return;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
     });
   }
 
@@ -338,4 +356,5 @@
   }
   initTagFilters();
   filterCards();
+  openExternalLinksInNewTab();
 })();
